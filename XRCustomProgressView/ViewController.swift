@@ -47,12 +47,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // MARK: - Initialization
     func initializationTableView() {
         
-        self.mainTableView = UITableView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height - 64), style: .plain)
+        self.mainTableView = UITableView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: UIScreen.main.bounds.size.height - 88), style: .grouped)
         self.mainTableView.backgroundColor = UIColor.gray
         self.mainTableView.delegate = self
         self.mainTableView.dataSource = self
         
         self.view.addSubview(self.mainTableView)
+        
+        if #available(iOS 11.0, *) {
+            self.mainTableView.contentInsetAdjustmentBehavior = .never
+        }
         
         // register cells
         self.mainTableView.register(MainCustomTableViewCell.classForCoder(), forCellReuseIdentifier: "MainCustomTableViewCell")
@@ -82,7 +86,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // MARK: - Delegates
     // MARK: - UITableViewDelegate
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 20
+        return 10
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -90,7 +94,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 140
+        return 160
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -106,14 +110,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footer = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 30))
-        footer.backgroundColor = UIColor.brown
+        let footer = UITableViewHeaderFooterView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 30))
+        footer.contentView.backgroundColor = UIColor.brown
+        footer.textLabel?.textColor = UIColor.white
+        footer.textLabel?.text = "section footer"
         return footer
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 30))
-        header.backgroundColor = UIColor.purple
+        let header = UITableViewHeaderFooterView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 30))
+        header.contentView.backgroundColor = UIColor.purple
+        header.textLabel?.textColor = UIColor.white
+        header.textLabel?.text = "section header"
         return header
     }
     
@@ -122,7 +130,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 20
+        return 25
     }
     
 }
