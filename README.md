@@ -1,3 +1,4 @@
 # XRCustomProgressView
 An custom progressView of CAShapeLayer with Core Animation.
-![]("https://github.com/hanzhuzi/XRCustomProgressView/blob/master/snapShot.gif")
+
+![效果图]("https://github.com/hanzhuzi/XRCustomProgressView/blob/master/XRCustomProgressView/snapShot.gif")
